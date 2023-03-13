@@ -13,6 +13,7 @@ import draylar.goml.registry.GOMLTags;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.player.*;
 import net.minecraft.entity.Tameable;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
@@ -107,52 +108,7 @@ public class EventHandlers {
 
     private static void registerAttackEntityCallback() {
         AttackEntityCallback.EVENT.register(GOML_PHASE, (playerEntity, world, hand, entity, entityHitResult) -> {
-            if (ClaimUtils.isInAdminMode(playerEntity)) {
-                return ActionResult.PASS;
-            }
-
-            if ((GetOffMyLawn.CONFIG.allowDamagingNamedHostileMobs
-                    || (GetOffMyLawn.CONFIG.allowDamagingUnnamedHostileMobs && entity.getCustomName() == null))
-                    && entity instanceof HostileEntity
-            ) {
-                return ActionResult.PASS;
-            }
-
-            if (entity instanceof PlayerEntity attackedPlayer) {
-                var claims = ClaimUtils.getClaimsAt(world, entity.getBlockPos());
-
-                if (claims.isEmpty()) {
-                    return ActionResult.PASS;
-                } else {
-                    claims = claims.filter((e) -> e.getValue().hasAugment(GOMLBlocks.PVP_ARENA.getFirst()));
-
-                    if (claims.isEmpty()) {
-                        return GetOffMyLawn.CONFIG.enablePvPinClaims ? ActionResult.PASS : ActionResult.FAIL;
-                    } else {
-                        var obj = new MutableObject<>(ActionResult.PASS);
-                        claims.forEach((e) -> {
-                            if (obj.getValue() == ActionResult.FAIL) {
-                                return;
-                            }
-                            var claim = e.getValue();
-
-                            obj.setValue(switch (claim.getData(GOMLBlocks.PVP_ARENA.getFirst().key)) {
-                                case EVERYONE -> ActionResult.PASS;
-                                case DISABLED -> ActionResult.FAIL;
-                                case TRUSTED -> claim.hasPermission(playerEntity) && claim.hasPermission(attackedPlayer)
-                                        ? ActionResult.PASS : ActionResult.FAIL;
-                                case UNTRUSTED -> !claim.hasPermission(playerEntity) && !claim.hasPermission(attackedPlayer)
-                                        ? ActionResult.PASS : ActionResult.FAIL;
-                            });
-                        });
-
-                        return obj.getValue();
-                    }
-                }
-            }
-
-            Selection<Entry<ClaimBox, Claim>> claimsFound = ClaimUtils.getClaimsAt(world, entity.getBlockPos());
-            return testPermission(claimsFound, playerEntity, hand, entity.getBlockPos(), PermissionReason.ENTITY_PROTECTED);
+            return ClaimUtils.canDamageEntity(world, entity, DamageSource.player(playerEntity)) ? ActionResult.PASS : ActionResult.FAIL;
         });
     }
 

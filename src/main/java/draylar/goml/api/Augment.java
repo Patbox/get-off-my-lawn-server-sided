@@ -1,6 +1,5 @@
 package draylar.goml.api;
 
-import draylar.goml.block.entity.ClaimAnchorBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -42,7 +41,7 @@ public interface Augment {
         return false;
     }
 
-    default boolean canPlace(Claim claim, World world, BlockPos pos, ClaimAnchorBlockEntity anchor) {
+    default boolean canPlace(Claim claim, World world, BlockPos pos) {
         return true;
     }
 

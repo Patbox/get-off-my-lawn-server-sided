@@ -3,6 +3,7 @@ package draylar.goml.api;
 import com.jamieswhiteshirt.rtree3i.Box;
 import com.jamieswhiteshirt.rtree3i.Entry;
 import com.jamieswhiteshirt.rtree3i.Selection;
+import draylar.goml.EventHandlers;
 import draylar.goml.GetOffMyLawn;
 import draylar.goml.api.event.ClaimEvents;
 import draylar.goml.block.augment.ExplosionControllerAugmentBlock;
@@ -11,9 +12,14 @@ import draylar.goml.other.GomlPlayer;
 import draylar.goml.other.StatusEnum;
 import draylar.goml.registry.GOMLBlocks;
 import me.lucko.fabric.api.permissions.v0.Permissions;
+import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -24,6 +30,7 @@ import net.minecraft.util.Pair;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -201,6 +208,71 @@ public class ClaimUtils {
 
             return false;
         });
+    }
+
+    public static boolean canDamageEntity(World world, Entity entity, DamageSource source) {
+        if (entity == source.getAttacker()) {
+            return true;
+        }
+
+        PlayerEntity player;
+
+        if (source.getAttacker() instanceof PlayerEntity playerEntity) {
+            player = playerEntity;
+        } else if (!GetOffMyLawn.CONFIG.protectAgainstHostileExplosionsActivatedByTrustedPlayers && source.getAttacker() instanceof MobEntity creeperEntity && creeperEntity.getTarget() instanceof PlayerEntity playerEntity) {
+            player = playerEntity;
+        } else if (source.getAttacker() instanceof ProjectileEntity projectileEntity && projectileEntity.getOwner() instanceof PlayerEntity playerEntity) {
+            player = playerEntity;
+        } else if (source.getAttacker() instanceof AreaEffectCloudEntity projectileEntity && projectileEntity.getOwner() instanceof PlayerEntity playerEntity) {
+            player = playerEntity;
+        } else if (source.getAttacker() instanceof TameableEntity projectileEntity && projectileEntity.getOwner() instanceof PlayerEntity playerEntity) {
+            player = playerEntity;
+        } else {
+            return true;
+        }
+
+        if (ClaimUtils.isInAdminMode(player) || entity == player) {
+            return true;
+        }
+
+        if ((GetOffMyLawn.CONFIG.allowDamagingNamedHostileMobs
+                || (GetOffMyLawn.CONFIG.allowDamagingUnnamedHostileMobs && entity.getCustomName() == null))
+                && entity instanceof HostileEntity
+        ) {
+            return true;
+        }
+        var claims = ClaimUtils.getClaimsAt(world, entity.getBlockPos());
+
+        if (claims.isEmpty()) {
+            return true;
+        }
+
+        if (entity instanceof PlayerEntity attackedPlayer) {
+            claims = claims.filter((e) -> e.getValue().hasAugment(GOMLBlocks.PVP_ARENA.getFirst()));
+
+            if (claims.isEmpty()) {
+                return GetOffMyLawn.CONFIG.enablePvPinClaims;
+            } else {
+                var obj = new MutableBoolean(true);
+                claims.forEach((e) -> {
+                    if (!obj.getValue()) {
+                        return;
+                    }
+                    var claim = e.getValue();
+
+                    obj.setValue(switch (claim.getData(GOMLBlocks.PVP_ARENA.getFirst().key)) {
+                        case EVERYONE -> true;
+                        case DISABLED -> false;
+                        case TRUSTED -> claim.hasPermission(player) && claim.hasPermission(attackedPlayer);
+                        case UNTRUSTED -> !claim.hasPermission(player) && !claim.hasPermission(attackedPlayer);
+                    });
+                });
+
+                return obj.getValue();
+            }
+        }
+
+        return EventHandlers.testPermission(claims, player, Hand.MAIN_HAND, entity.getBlockPos(), PermissionReason.ENTITY_PROTECTED) != ActionResult.FAIL;
     }
 
     public static boolean canModify(World world, BlockPos pos, @Nullable PlayerEntity player) {

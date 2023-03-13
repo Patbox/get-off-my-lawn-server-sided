@@ -95,9 +95,9 @@ public class ClaimAugmentBlock extends Block implements Augment, BlockEntityProv
                 var blockEntity = world.getBlockEntity(pos.offset(direction));
 
                 if (blockEntity instanceof ClaimAnchorBlockEntity claimAnchorBlockEntity && claimAnchorBlockEntity.getClaim() != null) {
-                    return this.canPlace(claimAnchorBlockEntity.getClaim(), (World) world, pos, claimAnchorBlockEntity);
+                    return this.canPlace(claimAnchorBlockEntity.getClaim(), (World) world, pos);
                 } else if (blockEntity instanceof ClaimAugmentBlockEntity claimAugmentBlockEntity && claimAugmentBlockEntity.getClaim() != null && claimAugmentBlockEntity.getClaim() != null) {
-                    return this.canPlace(claimAugmentBlockEntity.getClaim(), (World) world, pos, claimAugmentBlockEntity.getParent());
+                    return this.canPlace(claimAugmentBlockEntity.getClaim(), (World) world, pos);
                 }
             }
         }
@@ -173,7 +173,7 @@ public class ClaimAugmentBlock extends Block implements Augment, BlockEntityProv
     }
 
     @Override
-    public boolean canPlace(Claim claim, World world, BlockPos pos, @Deprecated ClaimAnchorBlockEntity anchor) {
+    public boolean canPlace(Claim claim, World world, BlockPos pos) {
         return !claim.hasAugment(this);
     }
 

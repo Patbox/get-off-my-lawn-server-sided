@@ -28,6 +28,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Heightmap;
 import org.jetbrains.annotations.ApiStatus;
@@ -87,7 +88,10 @@ public class ClaimCommand {
 
                     .then(literal("admin")
                             .requires(Permissions.require("goml.command.command.admin", 3))
-
+                            .then(literal("fixaugments")
+                                    .requires(Permissions.require("goml.command.command.fixaugments", true))
+                                    .executes(ClaimCommand::fixAugments)
+                            )
                             .then(literal("escape")
                                     .requires(Permissions.require("goml.command.command.admin.escape", true))
                                     .then(argument("player", EntityArgumentType.player())
@@ -141,6 +145,21 @@ public class ClaimCommand {
                     )
             );
         });
+    }
+
+    private static int fixAugments(CommandContext<ServerCommandSource> context) {
+        ClaimUtils.getClaimsAt(context.getSource().getWorld(), new BlockPos(context.getSource().getPosition())).forEach(x -> {
+            var copy = new ArrayList<>(x.getValue().getAugments().entrySet());
+
+            for (var y : copy) {
+                if (context.getSource().getWorld().getBlockState(y.getKey()).getBlock() != y.getValue()) {
+                    x.getValue().removeAugment(y.getKey());
+                }
+            }
+        });
+
+
+        return 0;
     }
 
     private static int escape(CommandContext<ServerCommandSource> context, ServerPlayerEntity player) {
