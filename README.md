@@ -27,7 +27,7 @@ To see claim areas, you'll have to craft a *Goggles of (Claim) Revealing*
 
 When this item equipped in the helmet, mainhand or offhand slot, claim outlines become visible.
 
-## [Recipes](https://github.com/Patbox/get-off-my-lawn-reserved/blob/1.19.4/recipes.md)
+## [Recipes](recipes.md)
 
 ## Claim configuration:
 To configure your claim, you can interact with the anchor block. A UI will appear that offers several configuration options:
