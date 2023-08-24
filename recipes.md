@@ -27,9 +27,6 @@
 ### Upgrade
 ![](recipes/withered_upgrade_kit.png)
 
-## Glistening Claim Anchor
-![](recipes/glistening_claim_anchor.png)
-
 # Claim Augments
 
 ## Angelic Aura
