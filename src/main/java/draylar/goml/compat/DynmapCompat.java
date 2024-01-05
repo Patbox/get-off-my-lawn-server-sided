@@ -5,8 +5,8 @@ import com.google.gson.JsonObject;
 import draylar.goml.api.Claim;
 import draylar.goml.api.ClaimUtils;
 import draylar.goml.api.event.ClaimEvents;
+import draylar.goml.api.event.ServerPlayerUpdateEvents;
 import eu.pb4.polymer.core.api.block.PolymerHeadBlock;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -19,7 +19,6 @@ import org.dynmap.markers.MarkerAPI;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -32,12 +31,6 @@ public class DynmapCompat {
     // From https://lospec.com/palette-list/minecraft-concrete (matches block order so matches goggles).
     private static final int[] COLORS = new int[]{0xcfd5d6, 0xe06101, 0xa9309f, 0x2489c7, 0xf1af15, 0x5ea918, 0xd5658f, 0x373a3e, 0x7d7d73, 0x157788, 0x64209c, 0x2d2f8f, 0x603c20, 0x495b24, 0x8e2121, 0x080a0f};
 
-    /**
-     * Store all players uuids and names to update existing claims when a player changes its name.
-     * This value gets reset each time the server stops, but it really doesn't matter.
-     */
-    private static final HashMap<UUID, String> playerNames = new HashMap<>();
-
     public static void init(final MinecraftServer server) {
         DynmapCommonAPIListener.register(new DynmapCommonAPIListener() {
             @Override
@@ -47,12 +40,13 @@ public class DynmapCompat {
                 if (markerApi.getMarkerSet(gomlMarkerSetId) == null) {
                     markerApi.createMarkerSet(gomlMarkerSetId, "GOML Claims", null, true);
                 }
+
                 server.getWorlds().forEach(world -> CLAIM.get(world).getClaims().values().filter(claim -> getClaimMarker(claim, markerApi) == null).forEach(claim -> renderClaimArea(claim, server, markerApi)));
                 ClaimEvents.CLAIM_CREATED.register(claim -> renderClaimArea(claim, server, markerApi));
                 ClaimEvents.CLAIM_RESIZED.register((claim, x, y) -> resizeClaimArea(claim, server, markerApi));
                 ClaimEvents.CLAIM_UPDATED.register(claim -> updateClaimArea(claim, server, markerApi));
                 ClaimEvents.CLAIM_DESTROYED.register(claim -> deleteClaimArea(claim, markerApi));
-                ServerPlayConnectionEvents.JOIN.register((handler, sender, minecraftServer) -> updateClaimAreasOfPlayer(handler.player, minecraftServer, markerApi));
+                ServerPlayerUpdateEvents.NAME_CHANGED.register(player -> updateClaimAreasOfPlayer(player, server, markerApi));
             }
         });
     }
@@ -89,12 +83,9 @@ public class DynmapCompat {
 
     private static void updateClaimAreasOfPlayer(ServerPlayerEntity player, MinecraftServer server, MarkerAPI markerApi) {
         UUID uuid = player.getUuid();
-        String name = player.getName().getString();
-        if (!playerNames.containsKey(uuid) || !playerNames.get(uuid).equals(name)) {
-            playerNames.put(uuid, name);
-            ClaimUtils.getClaimsOwnedBy(player.getWorld(), uuid).forEach(entry -> handleClaimAreaUpdate(entry.getValue(), server, markerApi, claimArea -> updateClaimAreaPlayerInfo(claimArea, uuid, name)));
-            ClaimUtils.getClaimsTrusted(player.getWorld(), uuid).forEach(entry -> handleClaimAreaUpdate(entry.getValue(), server, markerApi, claimArea -> updateClaimAreaPlayerInfo(claimArea, uuid, name)));
-        }
+        String name = player.getDisplayName().getString();
+        ClaimUtils.getClaimsOwnedBy(player.getWorld(), uuid).forEach(entry -> handleClaimAreaUpdate(entry.getValue(), server, markerApi, claimArea -> updateClaimAreaPlayerInfo(claimArea, uuid, name)));
+        ClaimUtils.getClaimsTrusted(player.getWorld(), uuid).forEach(entry -> handleClaimAreaUpdate(entry.getValue(), server, markerApi, claimArea -> updateClaimAreaPlayerInfo(claimArea, uuid, name)));
     }
 
     private static void updateClaimAreaPlayerInfo(AreaMarker claimArea, UUID uuid, String name) {
@@ -132,12 +123,7 @@ public class DynmapCompat {
     private static String getPlayers(Text key, Set<UUID> players, MinecraftServer server) {
         return players.isEmpty() ? "" : "<br>" + getLabelLine(key, players.stream().map(uuid -> {
             ServerPlayerEntity player = server.getPlayerManager().getPlayer(uuid);
-            if (player != null) {
-                String name = player.getName().getString();
-                playerNames.put(uuid, name);
-                return getPlayerDiv(name);
-            }
-            return getValueDiv(uuid.toString());
+            return player == null ? server.getUserCache().getByUuid(uuid).map(gameProfile -> getPlayerDiv(gameProfile.getName())).orElseGet(() -> getValueDiv(uuid.toString())) : getPlayerDiv(player.getDisplayName().getString());
         }).reduce("", (prev, curr) -> prev + curr), true);
     }
 
