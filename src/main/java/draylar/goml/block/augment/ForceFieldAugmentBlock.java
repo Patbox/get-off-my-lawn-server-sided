@@ -25,14 +25,19 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Pair;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.World;
 import org.apache.commons.lang3.mutable.MutableObject;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class ForceFieldAugmentBlock extends ClaimAugmentBlock {
 
@@ -46,8 +51,20 @@ public class ForceFieldAugmentBlock extends ClaimAugmentBlock {
     @Override
     public void onPlayerEnter(Claim claim, PlayerEntity player) {
         if (shouldBlock(claim, player) && claim.getClaimBox().minecraftBox().contains(player.getPos())) {
-            var pair = ClaimUtils.getClosestXZBorder(claim, player.getPos(), 1);
-            var pairPart = ClaimUtils.getClosestXZBorder(claim, player.getPos());
+            Pair<Vec3d, Direction> pair = ClaimUtils.getClosestXZBorder(claim, player.getPos(), 2);
+            int distance = 0;
+            while (true) {
+                var i = shouldBlock(player.getWorld(), pair.getLeft(), player);
+
+                if (i == -1) {
+                    break;
+                }
+                distance += i;
+                pair = ClaimUtils.getClosestXZBorder(claim, player.getPos(), 2 + distance);
+            }
+
+
+            var pairPart = ClaimUtils.getClosestXZBorder(claim, player.getPos(), distance);
 
             var pos = pair.getLeft();
             var dir = pair.getRight();
@@ -122,6 +139,14 @@ public class ForceFieldAugmentBlock extends ClaimAugmentBlock {
         }
 
         return doThing;
+    }
+
+
+    private int shouldBlock(World world, Vec3d pos, PlayerEntity player) {
+        var x = ClaimUtils.getClaimsAt(world, BlockPos.ofFloored(pos))
+                .filter(entry -> entry.getValue().hasAugment(this) && shouldBlock(entry.getValue(), player)).collect(Collectors.toList());
+
+        return x.isEmpty() ? -1 : x.get(0).getValue().getRadius();
     }
 
     @Override
