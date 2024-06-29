@@ -1,70 +1,70 @@
 {
-  "itemGroup.goml.group": "Слезь с Моей Лужайки",
+  "itemGroup.goml.group": "Get Off My Lawn",
 
-  "block.goml.makeshift_claim_anchor": "Временный Приват",
-  "block.goml.reinforced_claim_anchor": "Усиленный Приват",
-  "block.goml.glistening_claim_anchor": "Блестящий Приват",
-  "block.goml.crystal_claim_anchor": "Кристальный Приват",
-  "block.goml.emeradic_claim_anchor": "Эмеральдный Приват",
-  "block.goml.withered_claim_anchor": "Иссохший Приват",
-  "block.goml.admin_claim_anchor": "Админский Приват",
+  "block.goml.makeshift_claim_anchor": "Кустарный якорь привата",
+  "block.goml.reinforced_claim_anchor": "Усиленный якорь привата",
+  "block.goml.glistening_claim_anchor": "Блестящий якорь привата",
+  "block.goml.crystal_claim_anchor": "Кристальный якорь привата",
+  "block.goml.emeradic_claim_anchor": "Изумрудный якорь привата",
+  "block.goml.withered_claim_anchor": "Иссушённый якорь привата",
+  "block.goml.admin_claim_anchor": "Админский якорь привата",
 
   "block.goml.anchor_augment": "Улучшение привата: %s",
 
-  "block.goml.ender_binding": "Сдерживание Эндера",
-  "block.goml.ender_binding.description.1": "Предотвращает появление Эндерменов",
-  "block.goml.ender_binding.description.2": "телепортации внутри привата.",
+  "block.goml.ender_binding": "Сдерживание эндера",
+  "block.goml.ender_binding.description.1": "Не даёт эндерменам",
+  "block.goml.ender_binding.description.2": "телепортироваться внутрь привата.",
 
-  "block.goml.lake_spirit_grace": "Благодать Озерного Духа",
-  "block.goml.lake_spirit_grace.description.1": "Предоставляет всем игрокам в пределах привата",
+  "block.goml.lake_spirit_grace": "Благодать озёрного духа",
+  "block.goml.lake_spirit_grace.description.1": "Даёт всем игрокам в пределах привата",
   "block.goml.lake_spirit_grace.description.2": "водное дыхание и грацию дельфина.",
 
-  "block.goml.angelic_aura": "Ангельская Аура",
-  "block.goml.angelic_aura.description.1": "Предоставляет всем игрокам в пределах привата",
+  "block.goml.angelic_aura": "Ангельская аура",
+  "block.goml.angelic_aura.description.1": "Даёт всем игрокам в пределах привата",
   "block.goml.angelic_aura.description.2": "регенерацию.",
 
-  "block.goml.heaven_wings": "Небесные Крылья",
-  "block.goml.heaven_wings.description.1": "Предоставляет всем игрокам в пределах привата",
+  "block.goml.heaven_wings": "Небесные крылья",
+  "block.goml.heaven_wings.description.1": "Даёт всем игрокам в пределах привата",
   "block.goml.heaven_wings.description.2": "свободный полет.",
 
-  "block.goml.village_core": "Ядро Деревни",
+  "block.goml.village_core": "Ядро деревни",
   "block.goml.village_core.description.1": "Защищает всех жителей деревни в пределах привата",
   "block.goml.village_core.description.2": "от урона, нанесенного враждебными мобами.",
 
-  "block.goml.withering_seal": "Увядающая Печать",
+  "block.goml.withering_seal": "Печать иссушения",
   "block.goml.withering_seal.description.1": "Предотвращает получение игроками",
-  "block.goml.withering_seal.description.2": "эффект состояния увядания.",
+  "block.goml.withering_seal.description.2": "эффекта иссушения.",
 
-  "block.goml.chaos_zone": "Зона Хаоса",
-  "block.goml.chaos_zone.description.1": "Дает силу всем игрокам",
-  "block.goml.chaos_zone.description.2": "в привате.",
+  "block.goml.chaos_zone": "Зона хаоса",
+  "block.goml.chaos_zone.description.1": "Дает всем игрокам в пределах привата",
+  "block.goml.chaos_zone.description.2": "силу.",
 
-  "block.goml.defenders_right": "Право Защитника",
+  "block.goml.defenders_right": "Право защитника",
   "block.goml.defenders_right.description.1": "Дает дополнительный урон",
   "block.goml.defenders_right.description.2": "прирученным питомцам в привате.",
 
   "block.goml.greeter": "Приветствие",
-  "block.goml.greeter.description.1": "Отправляет сообщение игрокам",
+  "block.goml.greeter.description.1": "Отправляет сообщение игрокам,",
   "block.goml.greeter.description.2": "входящим в приват.",
 
   "block.goml.pvp_arena": "PvP-арена",
   "block.goml.pvp_arena.description.1": "Переключить способность для игроков",
   "block.goml.pvp_arena.description.2": "драться между собой.",
 
-  "block.goml.explosion_controller": "Контроллер Взрыва",
+  "block.goml.explosion_controller": "Контроллер взрыва",
   "block.goml.explosion_controller.description.1": "Позволяет переключить предотвращение",
-  "block.goml.explosion_controller.description.2": "естественные/не вызванные игроком взрывы.",
+  "block.goml.explosion_controller.description.2": "естественных (не вызванных игроком) взрывов.",
 
-  "block.goml.force_field": "Силовое Поле",
-  "block.goml.force_field.description.1": "Предотвращает ненадежных игроков",
-  "block.goml.force_field.description.2": "от входа в приват.",
+  "block.goml.force_field": "Силовое поле",
+  "block.goml.force_field.description.1": "Не даёт ненадежным игрокам",
+  "block.goml.force_field.description.2": "войти в приват.",
 
-  "item.goml.goggles": "Очки (Приват) Разоблачения",
-  "item.goml.reinforced_upgrade_kit": "Усиленный Комплект Улучшения",
-  "item.goml.glistening_upgrade_kit": "Блестящий Комплект Улучшения",
-  "item.goml.crystal_upgrade_kit": "Кристальный Комплект Улучшения",
-  "item.goml.emeradic_upgrade_kit": "Эмеральдный Комплект Улучшения",
-  "item.goml.withered_upgrade_kit": "Иссохший Комплект Улучшения",
+  "item.goml.goggles": "Очки разоблачения (приватов)",
+  "item.goml.reinforced_upgrade_kit": "Усиленный комплект улучшения",
+  "item.goml.glistening_upgrade_kit": "Блестящий комплект улучшения",
+  "item.goml.crystal_upgrade_kit": "Кристальный комплект улучшения",
+  "item.goml.emeradic_upgrade_kit": "Эмеральдный комплект улучшения",
+  "item.goml.withered_upgrade_kit": "Иссохший комплект улучшения",
 
   "text.goml.gui.input_greeting.title": "Изменить текст приветствия",
   "text.goml.gui.input_greeting.set": "Сохранить изменения",
@@ -75,7 +75,7 @@
   "text.goml.gui.back": "Назад",
   "text.goml.gui.player_list.title": "Доверенные игроки",
   "text.goml.gui.player_list.add_player": "Добавить игрока",
-  "text.goml.gui.click_to_remove": "Click to remove",
+  "text.goml.gui.click_to_remove": "Нажми, чтобы удалить",
   "text.goml.gui.player_add_gui.title": "Добавить игрока в приват",
   "text.goml.gui.claim.title": "Приват",
   "text.goml.gui.claim.about": "Про приват...",
@@ -114,7 +114,7 @@
   "text.goml.command.untrusted": "%s удален как доверенный участник из этого привата.",
   "text.goml.command.add_self": "Вам уже разрешен этот приват!",
   "text.goml.command.remove_self": "Вы не можете удалить себя из этого привата!",
-  "text.goml.command.removed_claim": "Удален приват в %s с источником %s.",
+  "text.goml.command.removed_claim": "Удален приват в %s с центром %s.",
   "text.goml.command.escaped": "Сбежал из привата!",
   "text.goml.command.cant_escape": "Вы не можете сбежать отсюда, потому что эта область не защищена от вас!",
 
@@ -153,5 +153,16 @@
   "text.goml.admin_mode.disabled": "Отключен режим администратора! Вы больше не можете изменять претензии других игроков!",
 
   "text.goml.changed_greeting": "Приветствие вашего привата было изменено на: %s",
-  "text.goml.disabled_augment": "Этот предмет отключен!"
+  "text.goml.disabled_augment": "Этот предмет отключен!",
+
+  "text.goml.vanilla_team.display": "Команда: %s",
+  "text.goml.vanilla_team.name": "Команда Minecraft",
+
+  "text.goml.argonauts.guild_type.display": "Гильдия: %s",
+  "text.goml.argonauts.guild_type.name": "Гильдия Argonaut",
+
+  "text.goml.dynmap.label.claim_type": "Тип привата",
+  "text.goml.dynmap.label.owners": "Владельцы",
+  "text.goml.dynmap.label.trusted": "Доверенные",
+  "text.goml.dynmap.label.augments": "Улучшения"
 }
