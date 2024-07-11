@@ -1,14 +1,18 @@
 package draylar.goml.other;
 
+import java.security.Permission;
+
 import com.jamieswhiteshirt.rtree3i.RTreeMap;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+
 import draylar.goml.GetOffMyLawn;
 import draylar.goml.api.Claim;
 import draylar.goml.api.ClaimBox;
 import draylar.goml.api.ClaimUtils;
 import draylar.goml.api.DataKey;
+import draylar.goml.api.event.ClaimEvents;
 import draylar.goml.config.GOMLConfig;
 import draylar.goml.registry.GOMLEntities;
 import draylar.goml.ui.ClaimListGui;
@@ -32,6 +36,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Heightmap;
+
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
@@ -142,6 +147,10 @@ public class ClaimCommand {
                                                 return openList(context, player[0]);
                                             })
                                     )
+                            )
+                            .then(literal("updateallclaims")
+                                    .requires(Permissions.require("goml.command.command.admin.updateallclaims", 4))
+                                    .executes(ClaimCommand::updateAllClaims)
                             )
                     )
             );
@@ -482,6 +491,15 @@ public class ClaimCommand {
     private static int reload(CommandContext<ServerCommandSource> context) {
         GetOffMyLawn.CONFIG = GOMLConfig.loadOrCreateConfig();
         context.getSource().sendFeedback(() -> prefix(Text.literal("Reloaded config")), false);
+        return 1;
+    }
+
+    private static int updateAllClaims(CommandContext<ServerCommandSource> context) {
+        ServerWorld world = context.getSource().getWorld();
+        ClaimUtils.getClaimsInDimension(world).forEach(claim -> {
+            ClaimEvents.CLAIM_UPDATED.invoker().onEvent(claim.getValue());
+        });
+        context.getSource().sendFeedback(() -> prefix(Text.literal("Updated all claims")), false);
         return 1;
     }
 

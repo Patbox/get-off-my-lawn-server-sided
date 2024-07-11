@@ -68,7 +68,8 @@ public class DynmapCompat {
     }
 
     private static void updateClaimArea(Claim claim, MinecraftServer server, MarkerAPI markerApi) {
-        handleClaimAreaUpdate(claim, server, markerApi, claimArea -> claimArea.setLabel(getClaimLabel(claim, server), true));
+        deleteClaimArea(claim, markerApi);
+        renderClaimArea(claim, server, markerApi);
     }
 
     private static void deleteClaimArea(Claim claim, MarkerAPI markerApi) {

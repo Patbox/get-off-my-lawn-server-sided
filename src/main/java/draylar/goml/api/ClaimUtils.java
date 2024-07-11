@@ -124,6 +124,10 @@ public class ClaimUtils {
         return GetOffMyLawn.CLAIM.get(world).getClaims().entries(box -> box.intersectsOpen(checkBox));
     }
 
+    public static Selection<Entry<ClaimBox, Claim>> getClaimsInDimension(WorldView world) {
+        return GetOffMyLawn.CLAIM.get(world).getClaims().entries(a -> true);
+    }
+
     public static Box createBox(int x1, int y1, int z1, int x2, int y2, int z2) {
         return Box.create(Math.min(x1, x2), Math.min(y1, y2), Math.min(z1, z2), Math.max(x1, x2), Math.max(y1, y2), Math.max(z1, z2));
     }
