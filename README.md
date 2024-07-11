@@ -97,7 +97,8 @@ You can find config file in `./config/getoffmylawn.json`. To reload it, just typ
   "placeholderNoClaimOwners": "<gray><italic>Nobody",
   "placeholderNoClaimTrusted": "<gray><italic>Nobody",
   "placeholderClaimCanBuildInfo": "${owners} <gray>(<green>${anchor}</green>)",
-  "placeholderClaimCantBuildInfo": "${owners} <gray>(<red>${anchor}</red>)"
+  "placeholderClaimCantBuildInfo": "${owners} <gray>(<red>${anchor}</red>)",
+  "claimColorSource": "location"        // either "location" or "player" - "location" will chose the color based on the location of the claim (hash of coordinates), "player" will chose the color based on the owner of the claim (hash of UUID).
 }
 ```
 
