@@ -13,6 +13,7 @@ import draylar.goml.other.OriginOwner;
 import draylar.goml.other.StatusEnum;
 import draylar.goml.registry.GOMLBlocks;
 import me.lucko.fabric.api.permissions.v0.Permissions;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
@@ -21,6 +22,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -35,6 +37,7 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ClaimUtils {
 
@@ -464,5 +467,45 @@ public class ClaimUtils {
 
         return claims.anyMatch(x -> x.getValue().hasPermission(trusted));
 
+    }
+
+    private static int claimColorIndex(Claim claim) {
+        int hash = 0;
+
+        if (GetOffMyLawn.CONFIG.usePlayerForColor()) {
+            // get lexicographically smallest UUID because set order is not stable
+            UUID min = null;
+
+            for (UUID id : claim.getOwners()) {
+                if (min == null || id.compareTo(min) < 0) {
+                    min = id;
+                }
+            }
+
+            if (min != null) {
+                hash = min.hashCode();
+            }
+        } else {
+            hash = claim.getOrigin().hashCode();
+        }
+
+        return hash & 0xF;
+    }
+
+    // From https://lospec.com/palette-list/minecraft-concrete (matches block order so matches goggles).
+    private static final int[] CLAIM_COLORS_RGB = new int[]{0xcfd5d6, 0xe06101, 0xa9309f, 0x2489c7, 0xf1af15, 0x5ea918, 0xd5658f, 0x373a3e, 0x7d7d73, 0x157788, 0x64209c, 0x2d2f8f, 0x603c20, 0x495b24, 0x8e2121, 0x080a0f};
+
+    private static final BlockState[] CLAIM_COLORS_BLOCKS = Registries.BLOCK.stream().filter((b) -> {
+        var id = Registries.BLOCK.getId(b);
+
+        return id.getNamespace().equals("minecraft") && id.getPath().endsWith("_concrete");
+    }).map((b) -> b.getDefaultState()).collect(Collectors.toList()).toArray(new BlockState[0]);
+
+    public static int dynmapClaimColor(Claim claim) {
+        return CLAIM_COLORS_RGB[claimColorIndex(claim)];
+    }
+
+    public static BlockState gogglesClaimColor(Claim claim) {
+        return CLAIM_COLORS_BLOCKS[claimColorIndex(claim)];
     }
 }

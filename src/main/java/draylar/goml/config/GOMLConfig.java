@@ -60,6 +60,8 @@ public class GOMLConfig {
     public WrappedText placeholderClaimCanBuildInfo = WrappedText.of("${owners} <gray>(<green>${anchor}</green>)");
     public WrappedText placeholderClaimCantBuildInfo = WrappedText.of("${owners} <gray>(<red>${anchor}</red>)");
 
+    public String claimColorSource = "location";
+
     public boolean canInteract(Block block) {
         return this.allowedBlockInteraction.contains(block);
     }
@@ -83,6 +85,14 @@ public class GOMLConfig {
         }
 
         return false;
+    }
+
+    public boolean useLocationForColor() {
+        return !usePlayerForColor();
+    }
+
+    public boolean usePlayerForColor() {
+        return "player".equalsIgnoreCase(claimColorSource);
     }
 
     public MutableText prefix(Text text) {

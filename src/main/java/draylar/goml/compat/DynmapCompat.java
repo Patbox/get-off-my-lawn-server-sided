@@ -28,9 +28,6 @@ import static draylar.goml.GetOffMyLawn.CLAIM;
 public class DynmapCompat {
     private static final String gomlMarkerSetId = "gomlMarkerSet";
 
-    // From https://lospec.com/palette-list/minecraft-concrete (matches block order so matches goggles).
-    private static final int[] COLORS = new int[]{0xcfd5d6, 0xe06101, 0xa9309f, 0x2489c7, 0xf1af15, 0x5ea918, 0xd5658f, 0x373a3e, 0x7d7d73, 0x157788, 0x64209c, 0x2d2f8f, 0x603c20, 0x495b24, 0x8e2121, 0x080a0f};
-
     public static void init(final MinecraftServer server) {
         DynmapCommonAPIListener.register(new DynmapCommonAPIListener() {
             @Override
@@ -60,7 +57,7 @@ public class DynmapCompat {
         ClaimCorners corners = getClaimCorners(claim);
         AreaMarker marker = markerApi.getMarkerSet(gomlMarkerSetId).createAreaMarker(getClaimId(claim), getClaimLabel(claim, server), true, worldName, corners.x, corners.z, true);
         // marker.setRangeY(corners.y[0], corners.y[1]);
-        int color = COLORS[(claim.getOrigin().hashCode() & 0xFFFF) % COLORS.length];
+        int color = ClaimUtils.dynmapClaimColor(claim);
         marker.setFillStyle(0.25, color);
         marker.setLineStyle(2, 1, color);
     }

@@ -22,12 +22,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Collectors;
 
 public class GogglesItem extends ArmorItem implements PolymerItem {
-    private static final BlockState[] STATES = Registries.BLOCK.stream().filter((b) -> {
-        var id = Registries.BLOCK.getId(b);
-
-        return id.getNamespace().equals("minecraft") && id.getPath().endsWith("_concrete");
-    }).map((b) -> b.getDefaultState()).collect(Collectors.toList()).toArray(new BlockState[0]);
-
     public GogglesItem() {
         super(ArmorMaterials.IRON, Type.HELMET, new Item.Settings().maxDamage(-1));
     }
@@ -47,9 +41,11 @@ public class GogglesItem extends ArmorItem implements PolymerItem {
                             var minPos = new BlockPos(box.x1(), Math.max(box.y1(), world.getBottomY()), box.z1());
                             var maxPos = new BlockPos(box.x2() - 1, Math.min(box.y2() - 1, world.getTopY()), box.z2() - 1);
 
+                            BlockState state = ClaimUtils.gogglesClaimColor(claim.getValue());
+
                             WorldParticleUtils.render(player, minPos, maxPos,
                                     //new DustParticleEffect(new Vec3f(0.8f, 0.8f, 0.8f), 2)
-                                    new BlockStateParticleEffect(ParticleTypes.BLOCK_MARKER, STATES[(claim.getValue().getOrigin().hashCode() & 0xFFFF) % STATES.length])
+                                    new BlockStateParticleEffect(ParticleTypes.BLOCK_MARKER, state)
                             );
                         });
             }
