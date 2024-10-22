@@ -50,7 +50,7 @@ public class GOMLConfig {
 
     public Set<Block> allowedBlockInteraction = new HashSet<>();
 
-    public Set<EntityType<?>> allowedEntityInteraction = Set.of(EntityType.BOAT, EntityType.CHEST_BOAT, EntityType.MINECART);
+    public Set<EntityType<?>> allowedEntityInteraction = Set.of();
 
     public WrappedText messagePrefix = WrappedText.of("<dark_gray>[<#a1ff59>GOML</color>]");
 

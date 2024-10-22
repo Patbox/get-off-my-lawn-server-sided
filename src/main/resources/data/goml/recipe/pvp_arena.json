@@ -6,12 +6,8 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:lapis_lazuli"
-    },
-    "E": {
-      "item": "minecraft:iron_sword"
-    }
+    "#": "minecraft:lapis_lazuli",
+    "E": "minecraft:iron_sword"
   },
   "result": {
     "id": "goml:pvp_arena",

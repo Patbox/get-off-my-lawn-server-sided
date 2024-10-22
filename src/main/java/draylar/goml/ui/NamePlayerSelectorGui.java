@@ -35,7 +35,7 @@ public class NamePlayerSelectorGui extends AnvilInputGui {
         this.setTitle(Text.translatable("text.goml.gui.player_selector.input.title"));
         this.setSlot(2, new GuiElementBuilder(Items.STRUCTURE_VOID)
                 .setName(Text.translatable("text.goml.gui.back").formatted(Formatting.RED))
-                .hideDefaultTooltip().noDefaults()
+                .hideDefaultTooltip()
                 .setCallback((x, y, z) -> {
                     playClickSound(this.player);
                     this.close(true);
@@ -97,7 +97,7 @@ public class NamePlayerSelectorGui extends AnvilInputGui {
                 .setName(Text.translatable("text.goml.gui.player_selector.input.invalid").formatted(Formatting.RED))
                 .setSkullOwner(GOMLTextures.GUI_QUESTION_MARK)
                 .setCallback((x, y, z) -> this.updateBack())
-                .hideDefaultTooltip().noDefaults());
+                .hideDefaultTooltip());
     }
 
     private void updateIcon() {
@@ -111,7 +111,7 @@ public class NamePlayerSelectorGui extends AnvilInputGui {
         }
 
         this.setSlot(1, b
-                .hideDefaultTooltip().noDefaults()
+                .hideDefaultTooltip()
                 .setCallback((x, y, z) -> {
                     if (this.selectedPlayer != null) {
                         playClickSound(this.player);

@@ -6,12 +6,8 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:redstone"
-    },
-    "E": {
-      "item": "minecraft:diamond"
-    }
+    "#":  "minecraft:redstone",
+    "E": "minecraft:diamond"
   },
   "result": {
     "id": "goml:chaos_zone",

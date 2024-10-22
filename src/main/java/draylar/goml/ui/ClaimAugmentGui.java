@@ -60,7 +60,7 @@ public class ClaimAugmentGui extends PagedGui {
             var entry = this.cachedEntries.get(id);
             var builder = new GuiElementBuilder();
             var item = entry.getValue() instanceof Block block ? block.asItem() : null;
-            builder.hideDefaultTooltip().noDefaults();
+            builder.hideDefaultTooltip();
             builder.addLoreLine(Text.translatable("text.goml.position",
                     Text.literal(entry.getKey().toShortString()).formatted(Formatting.WHITE)
             ).formatted(Formatting.BLUE));

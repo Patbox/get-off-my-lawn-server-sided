@@ -108,7 +108,7 @@ public abstract class PagedGui extends SimpleGui {
             case 7 -> DisplayElement.of(
                     new GuiElementBuilder(Items.STRUCTURE_VOID)
                             .setName(Text.translatable(this.closeCallback != null ? "text.goml.gui.back" : "text.goml.gui.close").formatted(Formatting.RED))
-                            .hideDefaultTooltip().noDefaults()
+                            .hideDefaultTooltip()
                             .setCallback((x, y, z) -> {
                                 playClickSound(this.player);
                                 this.close(this.closeCallback != null);
@@ -143,7 +143,7 @@ public abstract class PagedGui extends SimpleGui {
                 return DisplayElement.of(
                         new GuiElementBuilder(Items.PLAYER_HEAD)
                                 .setName(Text.translatable("text.goml.gui.next_page").formatted(Formatting.WHITE))
-                                .hideDefaultTooltip().noDefaults()
+                                .hideDefaultTooltip()
                                 .setSkullOwner(GOMLTextures.GUI_NEXT_PAGE)
                                 .setCallback((x, y, z) -> {
                                     playClickSound(gui.player);
@@ -154,7 +154,7 @@ public abstract class PagedGui extends SimpleGui {
                 return DisplayElement.of(
                         new GuiElementBuilder(Items.PLAYER_HEAD)
                                 .setName(Text.translatable("text.goml.gui.next_page").formatted(Formatting.DARK_GRAY))
-                                .hideDefaultTooltip().noDefaults()
+                                .hideDefaultTooltip()
                                 .setSkullOwner(GOMLTextures.GUI_NEXT_PAGE_BLOCKED)
                 );
             }
@@ -165,7 +165,7 @@ public abstract class PagedGui extends SimpleGui {
                 return DisplayElement.of(
                         new GuiElementBuilder(Items.PLAYER_HEAD)
                                 .setName(Text.translatable("text.goml.gui.previous_page").formatted(Formatting.WHITE))
-                                .hideDefaultTooltip().noDefaults()
+                                .hideDefaultTooltip()
                                 .setSkullOwner(GOMLTextures.GUI_PREVIOUS_PAGE)
                                 .setCallback((x, y, z) -> {
                                     playClickSound(gui.player);
@@ -176,7 +176,7 @@ public abstract class PagedGui extends SimpleGui {
                 return DisplayElement.of(
                         new GuiElementBuilder(Items.PLAYER_HEAD)
                                 .setName(Text.translatable("text.goml.gui.previous_page").formatted(Formatting.DARK_GRAY))
-                                .hideDefaultTooltip().noDefaults()
+                                .hideDefaultTooltip()
                                 .setSkullOwner(GOMLTextures.GUI_PREVIOUS_PAGE_BLOCKED)
                 );
             }

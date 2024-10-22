@@ -1,6 +1,6 @@
 package draylar.goml.mixin;
 
-import com.llamalad7.mixinextras.injector.WrapWithCondition;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import draylar.goml.api.ClaimUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;

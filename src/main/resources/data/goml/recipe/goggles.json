@@ -6,15 +6,9 @@
     "iii"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:string"
-    },
-    "G": {
-      "item": "minecraft:glass"
-    },
-    "i": {
-      "item": "minecraft:iron_ingot"
-    }
+    "#": "minecraft:string",
+    "G": "minecraft:glass",
+    "i": "minecraft:iron_ingot"
   },
   "result": {
     "id": "goml:goggles",

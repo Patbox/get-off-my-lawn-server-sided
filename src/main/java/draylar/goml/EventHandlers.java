@@ -80,9 +80,9 @@ public class EventHandlers {
                     if (claims.isEmpty()) {
                         return GetOffMyLawn.CONFIG.enablePvPinClaims ? ActionResult.PASS : ActionResult.FAIL;
                     } else {
-                        var obj = new MutableObject<>(ActionResult.PASS);
+                        var obj = new MutableObject<ActionResult>(ActionResult.PASS);
                         claims.forEach((e) -> {
-                            if (obj.getValue() == ActionResult.FAIL) {
+                            if (obj.getValue() instanceof ActionResult.Fail) {
                                 return;
                             }
                             var claim = e.getValue();

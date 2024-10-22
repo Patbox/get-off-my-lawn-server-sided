@@ -6,12 +6,8 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:stone_bricks"
-    },
-    "E": {
-      "item": "minecraft:emerald"
-    }
+    "#": "minecraft:stone_bricks",
+    "E": "minecraft:emerald"
   },
   "result": {
     "id": "goml:village_core",

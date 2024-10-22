@@ -198,7 +198,7 @@ public class ClaimCommand {
                 player.setVelocity(Vec3d.of(dir.getVector()).multiply(0.2));
 
                 if (player.hasVehicle()) {
-                    player.getVehicle().teleport((ServerWorld) player.getVehicle().getWorld(), pos.x, y, pos.z, PositionFlag.VALUES, player.getVehicle().getYaw(), player.getVehicle().getPitch());
+                    player.getVehicle().teleport((ServerWorld) player.getVehicle().getWorld(), pos.x, y, pos.z, PositionFlag.VALUES, player.getVehicle().getYaw(), player.getVehicle().getPitch(), false);
                     player.getVehicle().setVelocity(Vec3d.of(dir.getVector()).multiply(0.2));
                 }
 

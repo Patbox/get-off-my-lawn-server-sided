@@ -6,15 +6,9 @@
     "#S#"
   ],
   "key": {
-    "#": {
-      "tag": "minecraft:logs"
-    },
-    "S": {
-      "item": "minecraft:stone"
-    },
-    "E": {
-      "item": "minecraft:ender_pearl"
-    }
+    "#": "#minecraft:logs",
+    "S": "minecraft:stone",
+    "E": "minecraft:ender_pearl"
   },
   "result": {
     "id": "goml:makeshift_claim_anchor"

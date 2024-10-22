@@ -24,9 +24,11 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import xyz.nucleoid.packettweaker.PacketContext;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -37,8 +39,8 @@ public class UpgradeKitItem extends Item implements PolymerItem {
     private final ClaimAnchorBlock to;
     private final Item clientItem;
 
-    public UpgradeKitItem(ClaimAnchorBlock from, ClaimAnchorBlock to, Item display) {
-        super(new Item.Settings());
+    public UpgradeKitItem(Settings settings, ClaimAnchorBlock from, ClaimAnchorBlock to, Item display) {
+        super(settings);
         this.clientItem = display;
 
         this.from = from;
@@ -155,7 +157,12 @@ public class UpgradeKitItem extends Item implements PolymerItem {
     }
 
     @Override
-    public Item getPolymerItem(ItemStack itemStack, @Nullable ServerPlayerEntity player) {
+    public Item getPolymerItem(ItemStack itemStack, PacketContext context) {
         return this.clientItem;
+    }
+
+    @Override
+    public @Nullable Identifier getPolymerItemModel(ItemStack stack, PacketContext context) {
+        return null;
     }
 }

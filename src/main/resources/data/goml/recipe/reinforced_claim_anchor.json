@@ -6,18 +6,10 @@
     "#i#"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:stone"
-    },
-    "i": {
-      "item": "minecraft:iron_ingot"
-    },
-    "I": {
-      "item": "minecraft:iron_block"
-    },
-    "O": {
-      "item": "goml:makeshift_claim_anchor"
-    }
+    "#": "minecraft:stone",
+    "i": "minecraft:iron_ingot",
+    "I": "minecraft:iron_block",
+    "O": "goml:makeshift_claim_anchor"
   },
   "result": {
     "id": "goml:reinforced_claim_anchor",

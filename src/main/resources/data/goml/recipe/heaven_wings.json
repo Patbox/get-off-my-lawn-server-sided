@@ -6,12 +6,8 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:iron_ingot"
-    },
-    "E": {
-      "item": "minecraft:nether_star"
-    }
+    "#": "minecraft:iron_ingot",
+    "E": "minecraft:nether_star"
   },
   "result": {
     "id": "goml:heaven_wings",

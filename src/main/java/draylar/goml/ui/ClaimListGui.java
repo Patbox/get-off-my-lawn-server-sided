@@ -17,6 +17,7 @@ import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @ApiStatus.Internal
 public class ClaimListGui extends PagedGui {
@@ -61,7 +62,7 @@ public class ClaimListGui extends PagedGui {
                 if (Permissions.check(this.player, "goml.teleport", 3)) {
                     var world = server.getWorld(RegistryKey.of(RegistryKeys.WORLD, claim.getWorld()));
                     if (world != null) {
-                        this.player.teleport(world, claim.getOrigin().getX(), claim.getOrigin().getY() + 1, claim.getOrigin().getZ(), this.player.getYaw(), this.player.getPitch());
+                        this.player.teleport(world, claim.getOrigin().getX(), claim.getOrigin().getY() + 1, claim.getOrigin().getZ(), Set.of(), this.player.getYaw(), this.player.getPitch(), false);
                     }
                 }
             });

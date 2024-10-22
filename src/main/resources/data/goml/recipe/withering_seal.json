@@ -6,12 +6,8 @@
     "###"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:wither_rose"
-    },
-    "E": {
-      "item": "minecraft:soul_sand"
-    }
+    "#": "minecraft:wither_rose",
+    "E": "minecraft:soul_sand"
   },
   "result": {
     "id": "goml:withering_seal",

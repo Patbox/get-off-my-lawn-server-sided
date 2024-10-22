@@ -6,17 +6,10 @@
     "#i#"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:nether_bricks"
-    },
-    "i": {
-      "item": "minecraft:nether_star"
-    },
-    "I": {
-      "item": "minecraft:soul_sand"
-    },
-    "O": {
-      "item": "goml:emeradic_claim_anchor"
+    "#": "minecraft:nether_bricks",
+    "i": "minecraft:nether_star",
+    "I": "minecraft:soul_sand",
+    "O": "goml:emeradic_claim_anchor"
     }
   },
   "result": {

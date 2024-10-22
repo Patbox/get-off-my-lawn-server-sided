@@ -1,17 +1,6 @@
-buildscript {
-	dependencies {
-		classpath "de.guntram.mcmod:crowdin-translate:1.4+1.19.3"
-	}
-	repositories {
-		maven {
-			name = 'CrowdinTranslate source'
-			url = "https://minecraft.guntram.de/maven/"
-		}
-	}
-}
 
 plugins {
-	id 'fabric-loom' version '1.6.+'
+	id 'fabric-loom' version '1.7.+'
 	id 'maven-publish'
 	id "com.modrinth.minotaur" version "2.+"
 	id 'com.matthewprenger.cursegradle' version '1.4.0'
@@ -24,11 +13,6 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version + "+" + project.minecraft_version
 group = project.maven_group
 
-apply plugin: 'de.guntram.mcmod.crowdin-translate'
-crowdintranslate.crowdinProjectName = 'patbox-mods'
-crowdintranslate.jsonSourceName = 'goml'
-crowdintranslate.minecraftProjectName = '../data/goml'
-crowdintranslate.verbose = false
 
 loom {
 	accessWidenerPath = file("src/main/resources/goml.accesswidener")
@@ -103,7 +87,8 @@ dependencies {
 	modImplementation include("eu.pb4:sgui:${project.sgui_version}")
 	modImplementation include("eu.pb4:placeholder-api:${project.placeholder_version}")
 	modImplementation include("xyz.nucleoid:server-translations-api:${project.stapi_version}")
-	modImplementation include("me.lucko:fabric-permissions-api:0.2-SNAPSHOT")
+	//modImplementation include("me.lucko:fabric-permissions-api:0.2-SNAPSHOT")
+	modImplementation include("com.github.sakura-ryoko:fabric-permissions-api:dev~snapshot-jitpack-SNAPSHOT")
 	modImplementation include("eu.pb4:common-protection-api:1.0.0")
 
 	compileOnly "us.dynmap:DynmapCoreAPI:${dynmap_version}"

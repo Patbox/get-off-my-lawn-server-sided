@@ -9,21 +9,25 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
+import net.minecraft.item.equipment.ArmorMaterials;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import xyz.nucleoid.packettweaker.PacketContext;
 
 import java.util.stream.Collectors;
 
 public class GogglesItem extends ArmorItem implements PolymerItem {
-    public GogglesItem() {
-        super(ArmorMaterials.IRON, Type.HELMET, new Item.Settings().maxDamage(-1));
+    public GogglesItem(Settings settings) {
+        super(ArmorMaterials.IRON, EquipmentType.HELMET, settings.maxDamage(-1));
     }
 
     @Override
@@ -39,7 +43,7 @@ public class GogglesItem extends ArmorItem implements PolymerItem {
                         claim -> {
                             var box = claim.getKey().toBox();
                             var minPos = new BlockPos(box.x1(), Math.max(box.y1(), world.getBottomY()), box.z1());
-                            var maxPos = new BlockPos(box.x2() - 1, Math.min(box.y2() - 1, world.getTopY()), box.z2() - 1);
+                            var maxPos = new BlockPos(box.x2() - 1, Math.min(box.y2() - 1, world.getTopYInclusive()), box.z2() - 1);
 
                             BlockState state = ClaimUtils.gogglesClaimColor(claim.getValue());
 
@@ -58,7 +62,12 @@ public class GogglesItem extends ArmorItem implements PolymerItem {
     }
 
     @Override
-    public Item getPolymerItem(ItemStack itemStack, @Nullable ServerPlayerEntity player) {
+    public Item getPolymerItem(ItemStack itemStack, PacketContext player) {
         return Items.IRON_HELMET;
+    }
+
+    @Override
+    public @Nullable Identifier getPolymerItemModel(ItemStack stack, PacketContext context) {
+        return null;
     }
 }

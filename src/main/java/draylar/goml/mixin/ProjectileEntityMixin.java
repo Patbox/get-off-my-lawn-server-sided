@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -38,7 +39,7 @@ public abstract class ProjectileEntityMixin extends Entity implements OriginOwne
     }
 
     @Inject(method = "canModifyAt", at = @At("HEAD"), cancellable = true)
-    private void preventModification(World world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+    private void preventModification(ServerWorld world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         if (!ClaimUtils.hasMatchingClaims(this.getWorld(), this.getBlockPos(), this.goml$getOriginSafe(), this.ownerUuid)) {
             cir.setReturnValue(false);
         }

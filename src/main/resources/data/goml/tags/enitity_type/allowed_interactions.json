@@ -4,6 +4,8 @@
     {
       "id": "#ftbchunks:interact_whitelist",
       "required": false
-    }
+    },
+    "minecraft:minecart",
+    "#c:boats"
   ]
 }

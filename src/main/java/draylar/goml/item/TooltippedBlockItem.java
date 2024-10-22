@@ -22,16 +22,6 @@ public class TooltippedBlockItem extends PolymerHeadBlockItem {
     }
 
     @Override
-    public Text getName() {
-        return this.getBlock().getName();
-    }
-
-    @Override
-    public Text getName(ItemStack stack) {
-        return this.getName();
-    }
-
-    @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         super.appendTooltip(stack, context, tooltip, type);
 

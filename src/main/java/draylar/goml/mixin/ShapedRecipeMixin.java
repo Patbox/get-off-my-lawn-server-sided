@@ -16,7 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ShapedRecipe.class)
 public class ShapedRecipeMixin {
-    @Shadow @Final private ItemStack result;
+    @Shadow @Final
+    ItemStack result;
 
     @Inject(method = "matches(Lnet/minecraft/recipe/input/CraftingRecipeInput;Lnet/minecraft/world/World;)Z", at = @At("HEAD"), cancellable = true)
     private void goml_cancelIfDisabled(CraftingRecipeInput craftingRecipeInput, World world, CallbackInfoReturnable<Boolean> cir) {

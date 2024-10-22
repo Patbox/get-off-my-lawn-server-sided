@@ -6,18 +6,10 @@
     "#i#"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:nether_bricks"
-    },
-    "i": {
-      "item": "minecraft:nether_star"
-    },
-    "I": {
-      "item": "minecraft:soul_sand"
-    },
-    "O": {
-      "item": "minecraft:iron_ingot"
-    }
+    "#": "minecraft:nether_bricks",
+    "i": "minecraft:nether_star",
+    "I": "minecraft:soul_sand",
+    "O": "minecraft:iron_ingot"
   },
   "result": {
     "id": "goml:withered_upgrade_kit",

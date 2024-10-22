@@ -6,15 +6,9 @@
     "###"
   ],
   "key": {
-    "#": {
-      "tag": "minecraft:planks"
-    },
-    "I": {
-      "item": "minecraft:iron_ingot"
-    },
-    "E": {
-      "item": "minecraft:paper"
-    }
+    "#": "#minecraft:planks",
+    "I": "minecraft:iron_ingot",
+    "E": "minecraft:paper"
   },
   "result": {
     "id": "goml:greeter",

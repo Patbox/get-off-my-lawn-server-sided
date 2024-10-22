@@ -25,7 +25,7 @@ public abstract class EntityMixin implements OriginOwner {
     @Unique
     private BlockPos originPos;
 
-    @Inject(method = "isInvulnerableTo", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "isAlwaysInvulnerableTo", at = @At("HEAD"), cancellable = true)
     private void goml$isInvulnerable(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (!ClaimUtils.canDamageEntity(this.world, (Entity) (Object) this, damageSource)) {
             cir.setReturnValue(true);

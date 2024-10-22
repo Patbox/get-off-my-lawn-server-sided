@@ -8,14 +8,19 @@ import draylar.goml.block.SelectiveClaimAugmentBlock;
 import draylar.goml.block.augment.*;
 import draylar.goml.item.ClaimAnchorBlockItem;
 import draylar.goml.item.ToggleableBlockItem;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import eu.pb4.polymer.core.api.block.PolymerHeadBlock;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BooleanSupplier;
+import java.util.function.Function;
 import java.util.function.IntSupplier;
 
 public class GOMLBlocks {
@@ -30,57 +35,57 @@ public class GOMLBlocks {
     public static final Pair<ClaimAnchorBlock, Item> WITHERED_CLAIM_ANCHOR = register("withered_claim_anchor", () -> GetOffMyLawn.CONFIG.witheredRadius, 25, GOMLTextures.WITHERED_CLAIM_ANCHOR);
     public static final Pair<ClaimAnchorBlock, Item> ADMIN_CLAIM_ANCHOR = register("admin_claim_anchor", () -> -1, -1, GOMLTextures.ADMIN_CLAIM_ANCHOR);
 
-    public static final Pair<ClaimAugmentBlock, Item> ENDER_BINDING = register("ender_binding", new EnderBindingAugmentBlock(FabricBlockSettings.create().hardness(10).resistance(3600000.0F), GOMLTextures.ENDER_BINDING), 2);
-    public static final Pair<ClaimAugmentBlock, Item> LAKE_SPIRIT_GRACE = register("lake_spirit_grace", new LakeSpiritGraceAugmentBlock(FabricBlockSettings.create().hardness(10).resistance(3600000.0F), GOMLTextures.LAKE_SPIRIT_GRACE), 2);
-    public static final Pair<ClaimAugmentBlock, Item> ANGELIC_AURA = register("angelic_aura", new AngelicAuraAugmentBlock(FabricBlockSettings.create().hardness(10).resistance(3600000.0F), GOMLTextures.ANGELIC_AURA), 2);
-    public static final Pair<ClaimAugmentBlock, Item> HEAVEN_WINGS = register("heaven_wings", new HeavenWingsAugmentBlock(FabricBlockSettings.create().hardness(10).resistance(3600000.0F), GOMLTextures.HEAVEN_WINGS), 2);
-    public static final Pair<ClaimAugmentBlock, Item> VILLAGE_CORE = register("village_core", new ClaimAugmentBlock(FabricBlockSettings.create().hardness(10).resistance(3600000.0F), GOMLTextures.VILLAGE_CORE), 2);
-    public static final Pair<ClaimAugmentBlock, Item> WITHERING_SEAL = register("withering_seal", new WitheringSealAugmentBlock(FabricBlockSettings.create().hardness(10).resistance(3600000.0F), GOMLTextures.WITHERING_SEAL), 2);
-    public static final Pair<ClaimAugmentBlock, Item> CHAOS_ZONE = register("chaos_zone", new ChaosZoneAugmentBlock(FabricBlockSettings.create().hardness(10).resistance(3600000.0F), GOMLTextures.CHAOS_ZONE), 2);
-    public static final Pair<ClaimAugmentBlock, Item> GREETER = register("greeter", new GreeterAugmentBlock(FabricBlockSettings.create().hardness(10).resistance(3600000.0F), GOMLTextures.GREETER), 2);
-    public static final Pair<SelectiveClaimAugmentBlock, Item> PVP_ARENA = register("pvp_arena", new SelectiveClaimAugmentBlock("pvp_arena", FabricBlockSettings.create().hardness(10).resistance(3600000.0F), GOMLTextures.PVP_ARENA), 2);
-    public static final Pair<ClaimAugmentBlock, Item> EXPLOSION_CONTROLLER = register("explosion_controller", new ExplosionControllerAugmentBlock(FabricBlockSettings.create().hardness(10).resistance(3600000.0F), GOMLTextures.EXPLOSION_CONTROLLER), 2);
+    public static final Pair<ClaimAugmentBlock, Item> ENDER_BINDING = register("ender_binding", (s) -> new EnderBindingAugmentBlock(s.hardness(10).resistance(3600000.0F), GOMLTextures.ENDER_BINDING), 2);
+    public static final Pair<ClaimAugmentBlock, Item> LAKE_SPIRIT_GRACE = register("lake_spirit_grace",(s) ->  new LakeSpiritGraceAugmentBlock(s.hardness(10).resistance(3600000.0F), GOMLTextures.LAKE_SPIRIT_GRACE), 2);
+    public static final Pair<ClaimAugmentBlock, Item> ANGELIC_AURA = register("angelic_aura", (s) -> new AngelicAuraAugmentBlock(s.hardness(10).resistance(3600000.0F), GOMLTextures.ANGELIC_AURA), 2);
+    public static final Pair<ClaimAugmentBlock, Item> HEAVEN_WINGS = register("heaven_wings", (s) -> new HeavenWingsAugmentBlock(s.hardness(10).resistance(3600000.0F), GOMLTextures.HEAVEN_WINGS), 2);
+    public static final Pair<ClaimAugmentBlock, Item> VILLAGE_CORE = register("village_core",(s) ->  new ClaimAugmentBlock(s.hardness(10).resistance(3600000.0F), GOMLTextures.VILLAGE_CORE), 2);
+    public static final Pair<ClaimAugmentBlock, Item> WITHERING_SEAL = register("withering_seal", (s) -> new WitheringSealAugmentBlock(s.hardness(10).resistance(3600000.0F), GOMLTextures.WITHERING_SEAL), 2);
+    public static final Pair<ClaimAugmentBlock, Item> CHAOS_ZONE = register("chaos_zone", (s) -> new ChaosZoneAugmentBlock(s.hardness(10).resistance(3600000.0F), GOMLTextures.CHAOS_ZONE), 2);
+    public static final Pair<ClaimAugmentBlock, Item> GREETER = register("greeter", (s) -> new GreeterAugmentBlock(s.hardness(10).resistance(3600000.0F), GOMLTextures.GREETER), 2);
+    public static final Pair<SelectiveClaimAugmentBlock, Item> PVP_ARENA = register("pvp_arena", (s) -> new SelectiveClaimAugmentBlock("pvp_arena", s.hardness(10).resistance(3600000.0F), GOMLTextures.PVP_ARENA), 2);
+    public static final Pair<ClaimAugmentBlock, Item> EXPLOSION_CONTROLLER = register("explosion_controller", (s) -> new ExplosionControllerAugmentBlock(s.hardness(10).resistance(3600000.0F), GOMLTextures.EXPLOSION_CONTROLLER), 2);
 
-    public static final Pair<ClaimAugmentBlock, Item> FORCE_FIELD = register("force_field", new ForceFieldAugmentBlock(FabricBlockSettings.create().hardness(10).resistance(3600000.0F), GOMLTextures.FORCE_FIELD), 2);
+    public static final Pair<ClaimAugmentBlock, Item> FORCE_FIELD = register("force_field", (s) -> new ForceFieldAugmentBlock(s.hardness(10).resistance(3600000.0F), GOMLTextures.FORCE_FIELD), 2);
 
     private static Pair<ClaimAnchorBlock, Item> register(String name, IntSupplier radius, float hardness, String texture) {
+        var id = GetOffMyLawn.id(name);
         var claimAnchorBlock = Registry.register(
                     Registries.BLOCK,
-                    GetOffMyLawn.id(name),
-                    new ClaimAnchorBlock(FabricBlockSettings.create().strength(hardness, 3600000.0F), radius, texture)
+                    id,
+                    new ClaimAnchorBlock(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, id)).strength(hardness, 3600000.0F), radius, texture)
             );
 
 
-        var registeredItem = Registry.register(Registries.ITEM, GetOffMyLawn.id(name), new ClaimAnchorBlockItem(claimAnchorBlock, new Item.Settings(), 0));
+        var registeredItem = Registry.register(Registries.ITEM, id, new ClaimAnchorBlockItem(claimAnchorBlock,
+                new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM, GetOffMyLawn.id(name))).useBlockPrefixedTranslationKey(), 0));
         ANCHORS.add(claimAnchorBlock);
         return Pair.of(claimAnchorBlock, registeredItem);
     }
 
-    private static <T extends ClaimAugmentBlock> Pair<T, Item> register(String name, T augment) {
+    private static <T extends ClaimAugmentBlock> Pair<T, Item> register(String name, Function<Block.Settings, T> augment) {
         return register(name, augment, 0);
     }
 
-    private static <T extends ClaimAugmentBlock> Pair<T, Item> register(String name, T augment, int tooltipLines) {
-        return register(name, augment, tooltipLines, true);
-    }
 
-    private static <T extends ClaimAugmentBlock> Pair<T, Item> register(String name, T augment, int tooltipLines, boolean withGroup) {
+    private static <T extends ClaimAugmentBlock> Pair<T, Item> register(String name, Function<Block.Settings, T> augment, int tooltipLines) {
         var id = GetOffMyLawn.id(name);
-        ClaimAugmentBlock registered = Registry.register(
+        T registered = Registry.register(
                 Registries.BLOCK,
                 id,
-                augment
+                augment.apply(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, id)))
         );
         BooleanSupplier check = () -> GetOffMyLawn.CONFIG.enabledAugments.getOrDefault(registered, true);
 
-        augment.setEnabledCheck(check);
+        registered.setEnabledCheck(check);
 
-        Item registeredItem = Registry.register(Registries.ITEM, id, new ToggleableBlockItem(augment, new Item.Settings(), tooltipLines, check));
+        Item registeredItem = Registry.register(Registries.ITEM, id, new ToggleableBlockItem((Block & PolymerHeadBlock) registered,
+                new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM, id)).useBlockPrefixedTranslationKey(), tooltipLines, check));
         AUGMENTS.add(registered);
 
-        GOMLAugments.register(id, augment);
+        GOMLAugments.register(id, registered);
 
-        return Pair.of(augment, registeredItem);
+        return Pair.of(registered, registeredItem);
     }
 
     public static void init() {

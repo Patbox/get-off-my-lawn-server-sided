@@ -6,15 +6,9 @@
     "#P#"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:prismarine_bricks"
-    },
-    "P": {
-      "item": "minecraft:prismarine_shard"
-    },
-    "H": {
-      "item": "minecraft:heart_of_the_sea"
-    }
+    "#": "minecraft:prismarine_bricks",
+    "P": "minecraft:prismarine_shard",
+    "H": "minecraft:heart_of_the_sea"
   },
   "result": {
     "id": "goml:lake_spirit_grace",

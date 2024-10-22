@@ -12,8 +12,8 @@ import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -40,7 +40,7 @@ public class BucketItemMixin extends Item {
     }
 
     @Inject(at = @At("HEAD"), method = "use", cancellable = true)
-    private void goml_preventBucketUsageInClaims(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
+    private void goml_preventBucketUsageInClaims(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         HitResult hitResult = raycast(world, user, this.fluid == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
         BlockHitResult blockHitResult = (BlockHitResult) hitResult;
         BlockPos blockPos = blockHitResult.getBlockPos();
@@ -52,7 +52,7 @@ public class BucketItemMixin extends Item {
 
             if(noPermission) {
                 user.sendMessage(Text.literal("This block is protected by a claim."), true);
-                cir.setReturnValue(TypedActionResult.fail(user.getStackInHand(hand)));
+                cir.setReturnValue(ActionResult.FAIL);
             }
         }
     }

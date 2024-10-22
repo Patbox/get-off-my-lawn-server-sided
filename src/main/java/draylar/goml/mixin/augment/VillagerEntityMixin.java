@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.VillagerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -20,13 +21,13 @@ public abstract class VillagerEntityMixin extends LivingEntity {
     }
 
     @Override
-    public boolean isInvulnerableTo(DamageSource damageSource) {
-        if(damageSource.getAttacker() instanceof HostileEntity) {
+    public boolean isInvulnerableTo(ServerWorld world, DamageSource source) {
+        if(source.getAttacker() instanceof HostileEntity) {
             boolean b = ClaimUtils.getClaimsAt(getWorld(), getBlockPos()).anyMatch(claim -> claim.getValue().hasAugment(GOMLBlocks.VILLAGE_CORE.getFirst()));
 
             if(b) return true;
         }
 
-        return super.isInvulnerableTo(damageSource);
+        return super.isInvulnerableTo(world, source);
     }
 }
