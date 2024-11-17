@@ -16,6 +16,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class FireBlockMixin {
     @Inject(method = "trySpreadingFire", at = @At("HEAD"), cancellable = true)
     private void goml_preventFire(World world, BlockPos pos, int spreadFactor, Random random, int currentAge, CallbackInfo ci) {
+        if (world.isClient) {
+            return;
+        }
         if (!ClaimUtils.canFireDestroy(world, pos)) {
             ci.cancel();
         }

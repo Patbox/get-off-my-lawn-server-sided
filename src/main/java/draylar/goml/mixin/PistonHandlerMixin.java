@@ -30,6 +30,9 @@ public class PistonHandlerMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void storeClaimInfo(World world, BlockPos pos, Direction dir, boolean retracted, CallbackInfo ci) {
+        if (world.isClient) {
+            return;
+        }
         var claims = ClaimUtils.getClaimsAt(world, pos);
         this.claimsEmpty = claims.isEmpty();
         this.trusted = new HashSet<>();
@@ -41,6 +44,9 @@ public class PistonHandlerMixin {
 
     @ModifyReturnValue(method = "calculatePush", at = @At("RETURN"))
     private boolean preventMovement(boolean value) {
+        if (world.isClient) {
+            return value;
+        }
         if (value) {
             if (!checkClaims(this.movedBlocks) || !checkClaims(this.brokenBlocks)) {
                 this.movedBlocks.clear();
@@ -53,6 +59,7 @@ public class PistonHandlerMixin {
         return false;
     }
 
+    @Unique
     private boolean checkClaims(List<BlockPos> blocks) {
         for (var pos : blocks) {
             var claims = ClaimUtils.getClaimsAt(this.world, pos);

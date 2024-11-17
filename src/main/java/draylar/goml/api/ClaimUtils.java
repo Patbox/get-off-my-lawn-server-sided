@@ -216,6 +216,10 @@ public class ClaimUtils {
     }
 
     public static boolean canDamageEntity(World world, Entity entity, DamageSource source) {
+        if (world.isClient) {
+            return true;
+        }
+
         if (entity == source.getAttacker()) {
             return true;
         }

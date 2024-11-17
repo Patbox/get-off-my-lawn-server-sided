@@ -33,6 +33,9 @@ public abstract class ProjectileEntityMixin extends Entity implements OriginOwne
 
     @Inject(method = "onCollision", at = @At("HEAD"), cancellable = true)
     private void preventEffects(HitResult hitResult, CallbackInfo ci) {
+        if (getWorld().isClient) {
+            return;
+        }
         if (!ClaimUtils.hasMatchingClaims(this.getWorld(), this.getBlockPos(), this.goml$getOriginSafe(), this.ownerUuid)) {
             ci.cancel();
         }

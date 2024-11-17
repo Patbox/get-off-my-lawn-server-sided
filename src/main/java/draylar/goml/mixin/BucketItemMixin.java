@@ -41,6 +41,10 @@ public class BucketItemMixin extends Item {
 
     @Inject(at = @At("HEAD"), method = "use", cancellable = true)
     private void goml_preventBucketUsageInClaims(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
+        if (world.isClient) {
+            return;
+        }
+
         HitResult hitResult = raycast(world, user, this.fluid == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
         BlockHitResult blockHitResult = (BlockHitResult) hitResult;
         BlockPos blockPos = blockHitResult.getBlockPos();

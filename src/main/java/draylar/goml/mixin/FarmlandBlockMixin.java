@@ -21,6 +21,9 @@ public abstract class FarmlandBlockMixin extends Block {
 
     @Inject(method = "setToDirt", at = @At("HEAD"), cancellable = true)
     private static void goml$protectFarmland(Entity entity, BlockState state, World world, BlockPos pos, CallbackInfo ci) {
+        if (world.isClient) {
+            return;
+        }
         if (!ClaimUtils.canModify(world, pos, entity instanceof PlayerEntity player ? player : null)) {
             ci.cancel();
         }

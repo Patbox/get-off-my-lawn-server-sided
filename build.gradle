@@ -87,8 +87,7 @@ dependencies {
 	modImplementation include("eu.pb4:sgui:${project.sgui_version}")
 	modImplementation include("eu.pb4:placeholder-api:${project.placeholder_version}")
 	modImplementation include("xyz.nucleoid:server-translations-api:${project.stapi_version}")
-	modImplementation include("me.lucko:fabric-permissions-api:0.3.2-SNAPSHOT")
-	//modImplementation include("com.github.sakura-ryoko:fabric-permissions-api:dev~snapshot-jitpack-SNAPSHOT")
+	modImplementation include("me.lucko:fabric-permissions-api:0.3.3")
 	modImplementation include("eu.pb4:common-protection-api:1.0.0")
 
 	compileOnly "us.dynmap:DynmapCoreAPI:${dynmap_version}"

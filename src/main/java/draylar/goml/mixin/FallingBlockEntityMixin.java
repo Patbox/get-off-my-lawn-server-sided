@@ -27,6 +27,9 @@ public abstract class FallingBlockEntityMixin extends Entity implements OriginOw
 
     @ModifyExpressionValue(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;canPlaceAt(Lnet/minecraft/world/WorldView;Lnet/minecraft/util/math/BlockPos;)Z"))
     private boolean cantPlaceOnClaim(boolean bool, @Local(ordinal = 0) BlockPos pos) {
+        if (this.getWorld().isClient) {
+            return bool;
+        }
         if (bool) {
             return ClaimUtils.hasMatchingClaims(this.getWorld(), pos, this.goml$getOriginSafe());
         }
@@ -36,6 +39,9 @@ public abstract class FallingBlockEntityMixin extends Entity implements OriginOw
 
     @Inject(method = "handleFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;ceil(F)I", ordinal = 0), cancellable = true)
     private void blockFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
+        if (this.getWorld().isClient) {
+            return;
+        }
         if (!ClaimUtils.hasMatchingClaims(this.getWorld(), this.getBlockPos(), this.goml$getOriginSafe())) {
             cir.setReturnValue(false);
         }
