@@ -1,58 +1,44 @@
 {
-  "itemGroup.goml.group": "Get Off My Lawn",
-
   "block.goml.makeshift_claim_anchor": "Provisorischer Grundstücksanker",
   "block.goml.reinforced_claim_anchor": "Verstärkter Grundstücksanker",
   "block.goml.glistening_claim_anchor": "Glitzernder Grundstücksanker",
   "block.goml.crystal_claim_anchor": "Kristall Grundstücksanker",
   "block.goml.emeradic_claim_anchor": "Smaragd Grundstücksanker",
   "block.goml.withered_claim_anchor": "Verdorrter Grundstücksanker",
-
   "block.goml.anchor_augment": "Ankereigenschaft: %s",
-
   "block.goml.ender_binding": "Enderbindung",
   "block.goml.ender_binding.description.1": "Verhindert das Teleportieren",
   "block.goml.ender_binding.description.2": "von Endermen auf deinem Grundstück.",
-
   "block.goml.lake_spirit_grace": "Anmut der Seegeister",
   "block.goml.lake_spirit_grace.description.1": "Alle Spieler auf einem Grundstück",
   "block.goml.lake_spirit_grace.description.2": "erhalten Wasseratmung und Gunst des Delfins",
-
   "block.goml.angelic_aura": "Heilige Aura",
   "block.goml.angelic_aura.description.1": "Alle Spieler auf einem Grundstück",
   "block.goml.angelic_aura.description.2": "erhalten Regeneration.",
-
   "block.goml.heaven_wings": "Himmelsflügel",
   "block.goml.heaven_wings.description.1": "Alle Spieler auf einem Grundstück",
   "block.goml.heaven_wings.description.2": "haben Freiflug.",
-
   "block.goml.village_core": "Dorfkern",
   "block.goml.village_core.description.1": "Alle Dorfbewohner auf einem Grundstück",
   "block.goml.village_core.description.2": "sind von feinlichen Kreaturen geschützt.",
-
   "block.goml.withering_seal": "Siegel des Verfalls",
   "block.goml.withering_seal.description.1": "Beschützt Spieler auf einem Grundstück",
   "block.goml.withering_seal.description.2": "vor Verwitterung.",
-
   "block.goml.chaos_zone": "Chaoszone",
   "block.goml.chaos_zone.description.1": "Alle Spieler auf dem Grundstück",
   "block.goml.chaos_zone.description.2": "erhalten Stärke.",
-
   "block.goml.defenders_right": "Recht des Verteidigers",
   "block.goml.defenders_right.description.1": "Gezähmte Kreaturen auf dem Grundstück",
   "block.goml.defenders_right.description.2": "richten mehr Schaden an.",
-
   "block.goml.greeter": "Begrüßer",
   "block.goml.greeter.description.1": "Sendet Nachrichten an Spieler",
   "block.goml.greeter.description.2": "wenn sie das Grundstück betreten.",
-
   "item.goml.goggles": "Grundstücksbrille",
   "item.goml.reinforced_upgrade_kit": "Verstärktes Upgrade-Kit",
   "item.goml.glistening_upgrade_kit": "Glitzerndes Upgrade-Kit",
   "item.goml.crystal_upgrade_kit": "Kristall Upgrade-Kit",
   "item.goml.emeradic_upgrade_kit": "Smaragd Upgrade-Kit",
   "item.goml.withered_upgrade_kit": "Verdorrtes Upgrade-Kit",
-
   "text.goml.gui.input_greeting.title": "Ändere Grußtext",
   "text.goml.gui.input_greeting.set": "Speichern",
   "text.goml.gui.input_greeting.close": "Abbrechen",
@@ -70,13 +56,11 @@
   "text.goml.gui.claim.augments": "Ankereigenschaften...",
   "text.goml.gui.click_to_modify": "Einstellungen ändern...",
   "text.goml.gui.augment_list.title": "Ankereigenschaften",
-
   "text.goml.mode.everyone": "Alle Spieler",
   "text.goml.mode.trusted": "Nur Erlaubte Spieler",
   "text.goml.mode.disabled": "Deaktiviert",
   "text.goml.mode_toggle": "Modus: %s",
   "text.goml.mode_toggle.help": "Klicke, um Modus zu wechseln",
-
   "text.goml.command.no_claims": "Du befindest dich auf keinem Grundstück",
   "text.goml.command.already_added": "%s ist schon auf dem Grundstück erlaubt",
   "text.goml.command.number_in": "Grundtücke in %s: %s",
@@ -88,17 +72,13 @@
   "text.goml.command.add_self": "Du bist schon auf diesem Grundstück erlaubt!",
   "text.goml.command.remove_self": "Du kannst dich nicht selbs verweisen!",
   "text.goml.command.removed_claim": "Grundstück in %s mit der Herkunft von %s wurde aufgelöst.",
-
   "text.goml.block_protected": "Dieser Block ist Teil eines Grundstückes!",
   "text.goml.entity_protected": "Diese Kreatur ist Teil eines Grundstückes!",
   "text.goml.area_protected": "Diese Gegend ist Teil eines Grundstückes!",
-
   "text.goml.cant_place_claim.max_count_reached": "Du kannst nicht mehr Grundstücke besetzen! Du hast schon %s Grundstücke!",
   "text.goml.cant_place_claim.blacklisted_area": "Du kannst in %s bei %s kein Grundstück besetzen! Diese Gegend ist nicht erlaubt!",
   "text.goml.cant_place_claim.collides_with": "Du kannst hier kein Grundstück besetzen, es würde sich mit %s überschneiden!",
-
   "text.goml.cant_upgrade_claim.collides_with": "Du kannst dein Grundstück nicht verbessern, es würde sich mit %s überschneiden!",
-
   "text.goml.command.help.help": "zeigt diese Nachricht.",
   "text.goml.command.help.info": "Zeigt Information über Grundstücke in dem sich der Spieler befindet.",
   "text.goml.command.help.addowner": "Fügt einen Eigentümer zum Grundstück hinzu.",
@@ -107,18 +87,13 @@
   "text.goml.command.help.list": "Zeigt alle grundstücke, auf die du Zugrifff hast.",
   "text.goml.command.help.gui": "Zeigt Benutzeroberfläche vom Grundstück",
   "text.goml.command.help.admin": "Alle Administrator Befehle.",
-
-  "text.goml.position": "Position: %s",
-  "text.goml.radius": "Radius: %s",
   "text.goml.owners": "Eigentümer: %s",
   "text.goml.trusted": "Erlaubt: %s",
   "text.goml.your_claims": "Deine Grundstücke",
   "text.goml.someones_claims": "%s's Grundstücke",
   "text.goml.owner": "Eigentümer",
-
   "text.goml.admin_mode.enabled": "Administratormodus aktiviert! Du kannst jetzt andere Grundstücke bearbeiten!",
   "text.goml.admin_mode.disabled": "Administratormodus deaktiviert! Du kannst jetzt keine andere Grundstücke mehr bearbeiten!",
-
   "text.goml.changed_greeting": "Der Gruß deines Grundstückes wurde zu \"%s\" geändert.",
   "text.goml.disabled_augment": "Dieser Gegenstand ist deaktiviert!"
 }
