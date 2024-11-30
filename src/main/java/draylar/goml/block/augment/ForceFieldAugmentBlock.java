@@ -76,7 +76,7 @@ public class ForceFieldAugmentBlock extends ClaimAugmentBlock {
             for (int x = -1; x <= 1; x++) {
                 for (int y = -1; y <= 1; y++) {
                     ((ServerWorld) player.getWorld()).spawnParticles(
-                            (ServerPlayerEntity) player, new BlockStateParticleEffect(ParticleTypes.BLOCK_MARKER, Blocks.BARRIER.getDefaultState()), true,
+                            (ServerPlayerEntity) player, new BlockStateParticleEffect(ParticleTypes.BLOCK_MARKER, Blocks.BARRIER.getDefaultState()), true, true,
                             pos2.x + dir2.getOffsetZ() * x, player.getEyeY() + y, pos2.z + dir2.getOffsetX() * x,
                             1,
                             0.0, 0.0, 0.0,
